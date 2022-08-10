@@ -1,0 +1,27 @@
+{
+  "Title": "Terry\u0027s Factory",
+  "Type": "game",
+  "Org": "local",
+  "Ident": "terrysfactory",
+  "Schema": 1,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "ResourcePaths": [],
+  "HasCode": true,
+  "CodePath": "/code/",
+  "RootNamespace": null,
+  "Metadata": {
+    "MaxPlayers": 64,
+    "MinPlayers": 1,
+    "GameNetworkType": "Singleplayer",
+    "MapSelect": "Unrestricted",
+    "MapList": [
+      "facepunch.flatgrass"
+    ],
+    "RankType": "None",
+    "PerMapRanking": false,
+    "LeaderboardType": "None",
+    "ProjectTemplate": null,
+    "GameCategory": "None"
+  }
+}
