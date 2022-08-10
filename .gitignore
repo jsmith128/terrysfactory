@@ -1,0 +1,9 @@
+.codegen/
+obj/
+.intermediate
+tools_asset_info.bin
+code/Properties/launchSettings.json
+Properties/launchSettings.json
+*.csproj
+.vs
+*.generated.*
