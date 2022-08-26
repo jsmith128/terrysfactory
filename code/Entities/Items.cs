@@ -12,6 +12,7 @@ partial class Item : ModelEntity
 	public Vector3 CurrentWP = new Vector3();
 	// The most units we can move each tick
 	public int Speed = 1;
+	public float DistFromWP;
 
 	public override void Spawn()
 	{

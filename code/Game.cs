@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 //
 // You don't need to put things in a namespace, but it doesn't hurt.
 //
-namespace Sandbox;
+//namespace Sandbox;
 
 /// <summary>
 /// This is your game class. This is an entity that is created serverside when
@@ -134,8 +134,23 @@ public partial class TerrysFactory : Sandbox.Game
 				return;
 		}
 
+		
+
 		ent.Position = tr.EndPosition;
 		ent.Rotation = Rotation.From( new Angles( 0, owner.EyeRotation.Angles().yaw, 0 ) );
+
+		if ( ent is Item )
+		{
+			Log.Info( "It's an item, looking for a belt" );
+			TransportBelt belt = Help.CheckForNearbyBelt( tr.EndPosition + Vector3.Down * 2f);
+			Log.Info( belt == null );
+			if ( belt != null )
+			{
+				Log.Info( "belt isnt null (from Game.cs)" );
+				/*ent.Position = belt.Position + belt.Rotation.Right * 0.25f;*/
+				belt.RecieveItem( ent as Item );
+			}
+		}
 
 		//Log.Info( $"ent: {ent}" );
 	}
@@ -168,13 +183,13 @@ public partial class TerrysFactory : Sandbox.Game
 		base.Simulate( cl );
 
 		// TODO: CHANGE THIS SO IT ITERATES THROUGH ALL BELTS INSTEAD
-		foreach ( Entity ent in Entity.All )
+		foreach ( Entity ent in VarStore.AllBelts )
 		{
-			if ( ent.ClassName == "TransportBelt" )
-			{
-				TransportBelt belt = ent as TransportBelt;
-				belt.TickBelt();
-			}
+			//if ( ent.ClassName == "TransportBelt" )
+			//{
+			TransportBelt belt = ent as TransportBelt;
+			belt.TickBelt();
+			//}
 		}
 	}
 }

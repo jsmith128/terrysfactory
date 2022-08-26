@@ -7,8 +7,34 @@ partial class BeltSystem : Entity
 
 
 	// Offset of each belt in the belt system, at the center
-	public Dictionary<TransportBelt, float> BeltOffsets = new Dictionary<TransportBelt, float> ();
-	public Dictionary<string, float> Items = new Dictionary<string, float> ();
+	public Dictionary<TransportBelt, float> Belts = new Dictionary<TransportBelt, float> ();
+	//public Dictionary<TransportBelt, float> Belts = new Dictionary<TransportBelt, float> ();
+	public float OffsetPer = 64f;
+
+
+	public void SetupSystem( TransportBelt FirstBelt )
+	{
+		TransportBelt CurrentBelt = FirstBelt;
+		bool Continue = true;
+		int i = 0;
+		while ( Continue )
+		{
+			Belts.Add( CurrentBelt,  i * OffsetPer);
+
+			TransportBelt Next = CurrentBelt.CheckForBelt( "forward" );
+			if ( Next != null)
+			{
+				CurrentBelt = Next;
+			} else { Continue = false; }
+
+			i++;
+		}
+	}
+
+	public void RecheckSys()
+	{
+
+	}
 
 	public void PlaceItem( TransportBelt belt, string ClassName )
 	{
@@ -26,7 +52,7 @@ partial class BeltSystem : Entity
 
 	public float GetBeltOffset(TransportBelt belt)
 	{
-		return BeltOffsets [belt];
+		return Belts [belt];
 	}
 
 

@@ -50,6 +50,7 @@ partial class FactPlayer : Player
 		CameraMode = new FirstPersonCamera();
 
 		Log.Info( ">>>>>>> spawn_entity buildtool" );
+		Inventory.Add( new BuildTool(), true );
 		Log.Info( ">>>>>>> spawn_entity item" );
 
 		base.Respawn();

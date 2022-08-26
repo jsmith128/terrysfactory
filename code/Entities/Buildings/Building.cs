@@ -7,13 +7,13 @@ partial class Building : ModelEntity
 	//public virtual int ID => 0;
 	public virtual Model WorldModel => Model.Load( "models/buildings/transportbelt.vmdl" );
 
-	public bool IsFactoryPart = true;
+	//public bool IsFactoryPart = true;
 	
 	//Vector3 GridOffset = new Vector3(0,0,0);
 	//Rotation AngOffset = Rotation.Parse("0,0,0,0");
 	public virtual int Width { get; set; } = 1;
 	public virtual int Height { get; set; } = 1;
-	public float BreakSpeed = 0.65f;
+	//public float BreakSpeed = 0.65f;
 	public bool Rotates = false;
 
 	public override void Spawn()
