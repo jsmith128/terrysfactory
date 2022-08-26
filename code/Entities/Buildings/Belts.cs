@@ -55,6 +55,8 @@ partial class TransportBelt : Building
 
 	public void PostSpawnUpdate()
 	{
+		// FIX THIS
+		// MAKE IT ROTATE WITH THE BELTS
 		NextPointL = Position + NextPointLocalL;// * Rotation.Forward;
 		NextPointR = Position + NextPointLocalR;// * Rotation.Forward;
 
