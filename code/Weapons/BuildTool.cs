@@ -113,7 +113,7 @@ partial class BuildTool : Weapon
 		if (BuildingClassname == "TransportBelt" )
 		{
 			TransportBelt tb = ent as TransportBelt;
-			//tb.PostSpawnUpdate();
+			tb.PostSpawnUpdate();
 			VarStore.AllBelts.Add( tb );
 		}
 

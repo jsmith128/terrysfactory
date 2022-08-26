@@ -12,8 +12,10 @@ partial class TransportBelt : Building
 	// When they reach this point, give them the waypoint of the next belt on the correct side.
 	// These should be on the very edge of the tile.
 	// Convert this to world coordinates before giving it to item.
-	private Vector3 NextPointLocalL = new Vector3 ( 1, 0.25f, 0 );
-	private Vector3 NextPointLocalR = new Vector3 ( 1, 0.75f, 0 );
+	private Vector3 NextPointLocalL = new Vector3 ( 32, 24f, 0 );
+	private Vector3 NextPointLocalR = new Vector3 ( 32, 8f, 0 );
+
+	private float StartDistFromWP = 32f;
 
 	public Vector3 NextPointL;
 	public Vector3 NextPointR;
@@ -32,7 +34,7 @@ partial class TransportBelt : Building
 	public List<(string ItemCls, float NextItmD)> items = new List<(string ItemCls, float NextItmD)>();
 
 
-	public float Speed = 0.01f; // units/tick each item moves at
+	public float Speed = 0.3f; // units/tick each item moves at
 	new public bool Rotates = true;
 	//public Vector3 GridOffset = new Vector3( 0, 0, 0 );
 	//public bool IsConveyor = true;
@@ -46,13 +48,21 @@ partial class TransportBelt : Building
 		EnableTouch = true;
 		EnableAllCollisions = true;
 
-		// TODO: need to do something different depending on rotation
-		NextPointL = Position + NextPointLocalL;
-		NextPointR = Position + NextPointLocalR;
-		OffPointL = Position + NextPointL + Rotation.Forward * 0.25f;
-		OffPointR = Position + NextPointR + Rotation.Forward * 0.25f;
+		
 
 		base.OnActive();
+	}
+
+	public void PostSpawnUpdate()
+	{
+		NextPointL = Position + NextPointLocalL;// * Rotation.Forward;
+		NextPointR = Position + NextPointLocalR;// * Rotation.Forward;
+
+		//OffPointL = Position + NextPointL + Rotation.Forward * 0.25f;
+		//OffPointR = Position + NextPointR + Rotation.Forward * 0.25f;
+
+		Log.Info( "after "+ NextPointL + " " + NextPointR );
+
 	}
 
 	// delete item, then make a new one
@@ -74,9 +84,9 @@ partial class TransportBelt : Building
 	{
 		Log.Info( "Belt " + this + " recieved: " + item);
 		//var newItem = new Item();
-		item.Position = Position + Rotation.Right * 0.75f;
+		item.Position = Position + Rotation.Right * 24f;
 
-		item.DistFromWP = 0.5f;
+		item.DistFromWP = StartDistFromWP;
 		Log.Info( "added " +item+ " to ItemsR" );
 		ItemsR.Add( item);
 		Log.Info( "after last message message" );
@@ -176,43 +186,30 @@ partial class TransportBelt : Building
 		Log.Info( "ticking belt inside belts.cs" );
 		// For every item on this belt, subtract speed from distance and then set position accordingly
 		Log.Info( "ItemsR.Count == " + ItemsR.Count );
-		for ( int i = 0; i >= ItemsR.Count; )
+		for ( int i = 0; i < ItemsR.Count; i++ )
 		{
-			Log.Info( "Ticking item from tickbelt" );
+			Log.Info( "Ticking item from tickbelt loop" );
 			Item item = ItemsR[i];
 			Log.Info( "Item item = ItemsR[i];" );
-
-			if ( item.DistFromWP > 0 )
+			if ( item.DistFromWP > 0 ) // Item is NOT at the end of the belt, move it
 			{
-				Log.Info( "item.DistFromWP > 0" );
+				Log.Info( "distance from WP is more than 0" );
 				item.DistFromWP -= Speed;
 				item.Position = NextPointR - item.DistFromWP * Rotation.Forward;
-			} else if ( NextBelt != null )
+				Log.Info( "distfromWP: " + item.DistFromWP );
+
+			} else if ( NextBelt != null ) // If item IS at the end of the belt, and NextBelt exists
 			{
 				Log.Info( "item.DistFromWP < 0 && NextBelt != null" );
 				SendItem( item );
 				Log.Info( "sent item" );
 
+			} else if ( NextBelt == null ) // This if statement is redundant but i'm leaving it for now so it doesnt cause issues
+			{
+				Log.Info( "item is at the end of the belt, doing nothing" );
+				item.Position = NextPointR - item.DistFromWP * Rotation.Forward;
+				Log.Info("distfromWP: " + item.DistFromWP);
 			}
 		}
 	}
-
-	/*public void TickBelt()
-	{
-		if ( IsClient )
-			return;
-
-		foreach ( var ent in Entity.FindInBox( itembox ) )
-		{
-			//Log.Info( "found entity" );
-
-			if ( ent.ClassName == "Item" )
-			{
-				Log.Info( "found an item" );
-				Item item = ent as Item;
-
-				item.Position += Rotation.Forward * Speed;
-			}
-		}
-	}*/
 }
