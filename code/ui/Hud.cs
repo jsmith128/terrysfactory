@@ -17,7 +17,7 @@ public partial class Hud : HudEntity<RootPanel>
 		//RootPanel.AddChild<KillFeed>();
 		RootPanel.AddChild<Scoreboard<ScoreboardEntry>>();
 		RootPanel.AddChild<Health>();
-		//RootPanel.AddChild<InventoryBar>();
+		RootPanel.AddChild<InventoryBar>();
 		RootPanel.AddChild<BuildingInfo>();
 		//RootPanel.AddChild<SpawnMenu>();
 		RootPanel.AddChild<Crosshair>();

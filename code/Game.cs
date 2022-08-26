@@ -21,6 +21,8 @@ using System.Threading.Tasks;
 public partial class TerrysFactory : Sandbox.Game
 {
 	public static float gridSize = 64;
+	public TimeUntil beltTickTimer = 0.2f;
+	private float timertime = 0.2f;
 
 	public TerrysFactory()
 	{
@@ -143,7 +145,6 @@ public partial class TerrysFactory : Sandbox.Game
 		{
 			Log.Info( "It's an item, looking for a belt" );
 			TransportBelt belt = Help.CheckForNearbyBelt( tr.EndPosition + Vector3.Down * 2f);
-			Log.Info( belt == null );
 			if ( belt != null )
 			{
 				Log.Info( "belt isnt null (from Game.cs)" );
@@ -182,14 +183,28 @@ public partial class TerrysFactory : Sandbox.Game
 	{
 		base.Simulate( cl );
 
-		// TODO: CHANGE THIS SO IT ITERATES THROUGH ALL BELTS INSTEAD
-		foreach ( Entity ent in VarStore.AllBelts )
+		if ( IsClient )
+			return;
+		//Log.Info( beltTickTimer );
+		if ( beltTickTimer <= 0)
 		{
-			//if ( ent.ClassName == "TransportBelt" )
-			//{
-			TransportBelt belt = ent as TransportBelt;
-			belt.TickBelt();
-			//}
+			Log.Info( "##########################TICK" );
+			beltTickTimer = 1;
+			foreach ( Entity ent in VarStore.AllBelts )
+			{
+				Log.Info( "foreach" );
+				//if ( ent.ClassName == "TransportBelt" )
+				//{
+				TransportBelt belt = ent as TransportBelt;
+				if ( belt.ItemsR.Count > 0 || belt.ItemsL.Count > 0 )
+				{
+					Log.Info( "ticking belt" );
+					belt.TickBelt();
+
+				}
+				//}
+			}
 		}
+		
 	}
 }

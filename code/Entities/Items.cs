@@ -9,9 +9,9 @@ partial class Item : ModelEntity
 	public virtual Model WorldModel => Model.Load( "models/items/testball.vmdl" );
 
 	// Where we want to end up
-	public Vector3 CurrentWP = new Vector3();
+	//public Vector3 CurrentWP = new Vector3();
 	// The most units we can move each tick
-	public int Speed = 1;
+	//public int Speed = 1;
 	public float DistFromWP;
 
 	public override void Spawn()
@@ -35,13 +35,13 @@ partial class Item : ModelEntity
 		//Tags.Add( "trigger" );
 	}
 
-	public virtual void Tick()
+	/*public virtual void Tick()
 	{
 		if ( IsClient )
 			return;
 
 		Position += (Position - CurrentWP).Clamp(-Speed, Speed);
-	}
+	}*/
 	
 	/*public virtual void Tick()
 	{

@@ -4,7 +4,7 @@ using System.Linq;
 
 partial class Inventory : BaseInventory
 {
-	public Inventory( Player player ) : base( player )
+	public Inventory( FactPlayer player ) : base( player )
 	{
 	}
 

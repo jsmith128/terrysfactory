@@ -72,7 +72,7 @@ partial class TransportBelt : Building
 	// Only call this if the position for the item is already set and wont be set again
 	public void RecieveItem( Item item )
 	{
-		Log.Info( "Belt " + this + "recieved: " + item);
+		Log.Info( "Belt " + this + " recieved: " + item);
 		//var newItem = new Item();
 		item.Position = Position + Rotation.Right * 0.75f;
 
@@ -170,18 +170,28 @@ partial class TransportBelt : Building
 
 	public void TickBelt()
 	{
+		if (ItemsL.Count == 0 && ItemsR.Count == 0)
+			return;
+
+		Log.Info( "ticking belt inside belts.cs" );
 		// For every item on this belt, subtract speed from distance and then set position accordingly
-		for ( int i = 0; i < ItemsR.Count; )
+		Log.Info( "ItemsR.Count == " + ItemsR.Count );
+		for ( int i = 0; i >= ItemsR.Count; )
 		{
+			Log.Info( "Ticking item from tickbelt" );
 			Item item = ItemsR[i];
-			
+			Log.Info( "Item item = ItemsR[i];" );
+
 			if ( item.DistFromWP > 0 )
 			{
+				Log.Info( "item.DistFromWP > 0" );
 				item.DistFromWP -= Speed;
 				item.Position = NextPointR - item.DistFromWP * Rotation.Forward;
 			} else if ( NextBelt != null )
 			{
+				Log.Info( "item.DistFromWP < 0 && NextBelt != null" );
 				SendItem( item );
+				Log.Info( "sent item" );
 
 			}
 		}

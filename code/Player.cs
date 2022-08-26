@@ -51,6 +51,8 @@ partial class FactPlayer : Player
 
 		Log.Info( ">>>>>>> spawn_entity buildtool" );
 		Inventory.Add( new BuildTool(), true );
+		Inventory.Add( new ItemTool(), true );
+		Inventory.Add( new Fists() );
 		Log.Info( ">>>>>>> spawn_entity item" );
 
 		base.Respawn();
