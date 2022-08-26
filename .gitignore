@@ -1,2 +1,6 @@
 
 *.cache
+code/obj/Debug/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+code/obj/Debug/terrysfactory.GlobalUsings.g.cs
+code/obj/Debug/terrysfactory.AssemblyInfo.cs
+code/obj/Debug/terrysfactory.GeneratedMSBuildEditorConfig.editorconfig
