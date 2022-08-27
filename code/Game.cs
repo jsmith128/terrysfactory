@@ -22,7 +22,7 @@ public partial class TerrysFactory : Sandbox.Game
 {
 	public static float gridSize = 64;
 	public TimeUntil beltTickTimer = 0.2f;
-	private float timertime = 0.2f;
+	private float timertime = 0.1f;
 
 	public TerrysFactory()
 	{
@@ -189,7 +189,7 @@ public partial class TerrysFactory : Sandbox.Game
 		if ( beltTickTimer <= 0)
 		{
 			Log.Info( "##########################TICK" );
-			beltTickTimer = 1;
+			beltTickTimer = timertime;
 			foreach ( Entity ent in VarStore.AllBelts )
 			{
 				Log.Info( "foreach" );

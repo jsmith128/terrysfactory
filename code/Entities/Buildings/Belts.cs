@@ -12,10 +12,12 @@ partial class TransportBelt : Building
 	// When they reach this point, give them the waypoint of the next belt on the correct side.
 	// These should be on the very edge of the tile.
 	// Convert this to world coordinates before giving it to item.
-	private Vector3 NextPointLocalL = new Vector3 ( 32, 24f, 0 );
-	private Vector3 NextPointLocalR = new Vector3 ( 32, 8f, 0 );
+	private Vector3 NextPointLocalL = new Vector3 ( 32, -12f, 2 );
+	private Vector3 NextPointLocalR = new Vector3 ( 32, 12f, 2 );
 
-	private float StartDistFromWP = 32f;
+	private Vector3 ThcknsOffset = new Vector3( 0, 0, 6 );
+
+	private float StartDistFromWP = 64f;
 
 	public Vector3 NextPointL;
 	public Vector3 NextPointR;
@@ -34,7 +36,7 @@ partial class TransportBelt : Building
 	public List<(string ItemCls, float NextItmD)> items = new List<(string ItemCls, float NextItmD)>();
 
 
-	public float Speed = 0.3f; // units/tick each item moves at
+	public float Speed = 0.4f; // units/tick each item moves at
 	new public bool Rotates = true;
 	//public Vector3 GridOffset = new Vector3( 0, 0, 0 );
 	//public bool IsConveyor = true;
@@ -57,13 +59,24 @@ partial class TransportBelt : Building
 	{
 		// FIX THIS
 		// MAKE IT ROTATE WITH THE BELTS
-		NextPointL = Position + NextPointLocalL;// * Rotation.Forward;
-		NextPointR = Position + NextPointLocalR;// * Rotation.Forward;
+		NextPointL = Position + NextPointLocalL.x * Rotation.Forward + NextPointLocalL.y * Rotation.Right + ThcknsOffset;
+		NextPointR = Position + NextPointLocalR.x * Rotation.Forward + NextPointLocalR.y * Rotation.Right + ThcknsOffset;
+		//NextPointL = Position + NextPointLocalL;// * Rotation.Forward;
+		//NextPointR = Position + NextPointLocalR;// * Rotation.Forward;
 
 		//OffPointL = Position + NextPointL + Rotation.Forward * 0.25f;
 		//OffPointR = Position + NextPointR + Rotation.Forward * 0.25f;
 
 		Log.Info( "after "+ NextPointL + " " + NextPointR );
+		//Item it = new Item();
+		//it.Position = NextPointL;
+		//it = new Item();
+		//it.Position = NextPointR;
+		//DebugOverlay.Axis( NextPointL, Rotation, duration: 1000 );
+		//DebugOverlay.Axis( NextPointR, Rotation, duration: 1000 );
+		DebugOverlay.Text( "NextPointL", NextPointL, 200, 200 );
+		DebugOverlay.Text( "NextPointR", NextPointR, 200, 200 );
+
 
 	}
 
@@ -78,20 +91,21 @@ partial class TransportBelt : Building
 		//var newItem = new Item();
 		//newItem.Position = OffPointR;
 		NextBelt.RecieveItem( item );
-		item.Position = NextBelt.Position + Rotation.Right * 0.5f;
+		DebugOverlay.Text( "Sent an item", Position, 1, 100 );
 	}
 
 	// Only call this if the position for the item is already set and wont be set again
 	public void RecieveItem( Item item )
 	{
 		Log.Info( "Belt " + this + " recieved: " + item);
-		//var newItem = new Item();
-		item.Position = Position + Rotation.Right * 24f;
 
+		item.Position = NextPointR - 64f * Rotation.Forward;
 		item.DistFromWP = StartDistFromWP;
 		Log.Info( "added " +item+ " to ItemsR" );
 		ItemsR.Add( item);
 		Log.Info( "after last message message" );
+		DebugOverlay.Text( "Recieved an item", Position, 1, 100 );
+
 	}
 
 	/*public (Vector3, Vector3) GetVerts()

@@ -119,9 +119,10 @@ partial class BuildTool : Weapon
 
 		foreach ( TransportBelt tb in VarStore.AllBelts )
 		{
-			if ( tb.CheckForBelt( "forward" ) != null )
+			TransportBelt nextb = tb.CheckForBelt( "forward" );
+			if ( nextb != null )
 			{
-				tb.NextBelt = tb;
+				tb.NextBelt = nextb;
 			}
 		}
 	}
