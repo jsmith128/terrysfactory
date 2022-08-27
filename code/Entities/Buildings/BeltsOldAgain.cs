@@ -1,4 +1,4 @@
-﻿using Sandbox;
+﻿/*using Sandbox;
 using System.Collections.Generic;
 
 partial class TransportBelt : Building
@@ -57,12 +57,23 @@ partial class TransportBelt : Building
 
 	public void PostSpawnUpdate()
 	{
-
+		// FIX THIS
+		// MAKE IT ROTATE WITH THE BELTS
 		NextPointL = Position + NextPointLocalL.x * Rotation.Forward + NextPointLocalL.y * Rotation.Right + ThcknsOffset;
 		NextPointR = Position + NextPointLocalR.x * Rotation.Forward + NextPointLocalR.y * Rotation.Right + ThcknsOffset;
+		//NextPointL = Position + NextPointLocalL;// * Rotation.Forward;
+		//NextPointR = Position + NextPointLocalR;// * Rotation.Forward;
+
+		//OffPointL = Position + NextPointL + Rotation.Forward * 0.25f;
+		//OffPointR = Position + NextPointR + Rotation.Forward * 0.25f;
 
 		Log.Info( "after "+ NextPointL + " " + NextPointR );
-
+		//Item it = new Item();
+		//it.Position = NextPointL;
+		//it = new Item();
+		//it.Position = NextPointR;
+		//DebugOverlay.Axis( NextPointL, Rotation, duration: 1000 );
+		//DebugOverlay.Axis( NextPointR, Rotation, duration: 1000 );
 		DebugOverlay.Text( "NextPointL", NextPointL, 200, 200 );
 		DebugOverlay.Text( "NextPointR", NextPointR, 200, 200 );
 
@@ -76,9 +87,10 @@ partial class TransportBelt : Building
 		Log.Info( "Belt " + this + " sent: " + item + " to: " + NextBelt );
 
 		ItemsR.Remove( item );
-
+		//item.Delete();
+		//var newItem = new Item();
+		//newItem.Position = OffPointR;
 		NextBelt.RecieveItem( item );
-
 		DebugOverlay.Text( "Sent an item", Position, 1, 100 );
 	}
 
@@ -94,6 +106,42 @@ partial class TransportBelt : Building
 		Log.Info( "after last message message" );
 		DebugOverlay.Text( "Recieved an item", Position, 1, 100 );
 
+	}
+
+	*//*public (Vector3, Vector3) GetVerts()
+	{
+		// This probably works better right here
+		//Help.BBoxFromRadHeightCenter( 32, 8.2f, new Vector3( Position.x, Position.y, Position.z + 10.9f ) );
+		Log.Info( Position );
+
+		Vector3 mins = new Vector3();
+		Vector3 maxs = new Vector3();
+
+		Vector3 minsOffset = new Vector3(-32, -32, 6.8f);
+		Vector3 maxsOffset = new Vector3(32, 32, 15f);
+
+		mins += minsOffset + Position;
+		maxs += maxsOffset + Position;
+
+		Log.Info( maxs + " " + mins );
+		return (mins, maxs);
+	}*//*
+
+
+	// PROBABLY DONT NEED THIS HERE
+	public TransportBelt CheckForNearbyBelt( Vector3 point )
+	{
+		BBox beltbox = Help.BBoxFromRadHeightCenter( 16, 12, point );
+
+		foreach ( var ent in Entity.FindInBox( beltbox ) )
+		{
+			if ( ent.ClassName == "TransportBelt" )
+			{
+				Log.Info( "found a belt" );
+				return ent as TransportBelt;
+			}
+		}
+		return null;
 	}
 
 	public TransportBelt CheckForBelt( string Dir )
@@ -181,3 +229,4 @@ partial class TransportBelt : Building
 		}
 	}
 }
+*/
