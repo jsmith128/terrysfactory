@@ -14,14 +14,15 @@
     "MaxPlayers": 64,
     "MinPlayers": 1,
     "GameNetworkType": "Singleplayer",
-    "MapSelect": "Unrestricted",
+    "MapSelect": "Official",
     "MapList": [
-      "facepunch.flatgrass"
+      "facepunch.flatgrass",
+      "steveskeleton.terrysfactorymap"
     ],
     "RankType": "None",
     "PerMapRanking": false,
     "LeaderboardType": "None",
     "ProjectTemplate": null,
-    "GameCategory": "None"
+    "GameCategory": "Sandbox"
   }
 }

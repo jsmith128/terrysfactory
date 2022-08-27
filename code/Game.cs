@@ -22,7 +22,7 @@ public partial class TerrysFactory : Sandbox.Game
 {
 	public static float gridSize = 64;
 	public TimeUntil beltTickTimer = 0.2f;
-	private float timertime = 0.1f;
+	private float timertime = 0.5f;
 
 	public TerrysFactory()
 	{
@@ -149,7 +149,7 @@ public partial class TerrysFactory : Sandbox.Game
 			{
 				Log.Info( "belt isnt null (from Game.cs)" );
 				/*ent.Position = belt.Position + belt.Rotation.Right * 0.25f;*/
-				belt.RecieveItem( ent as Item );
+				belt.RecieveItem( ent as Item, null, 1 );
 			}
 		}
 
@@ -196,12 +196,12 @@ public partial class TerrysFactory : Sandbox.Game
 				//if ( ent.ClassName == "TransportBelt" )
 				//{
 				TransportBelt belt = ent as TransportBelt;
-				if ( belt.ItemsR.Count > 0 || belt.ItemsL.Count > 0 )
-				{
-					Log.Info( "ticking belt" );
-					belt.TickBelt();
+				/*if ( belt.TrackL.Count > 0 || belt.TrackR.Count > 0 )
+				{*/
+				Log.Info( "ticking belt" );
+				belt.TickBelt();
 
-				}
+				/*}*/
 				//}
 			}
 		}

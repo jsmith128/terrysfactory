@@ -217,12 +217,18 @@ partial class BuildTool : Weapon
 				//Hologram.Delete();
 				//Hologram = TypeLibrary.Create<ModelEntity>( BuildingClassname );
 				if ( BuildingClassname == "TransportBelt" )
+				{
 					//Hologram.Model = Model.Load( "models/buildings/transportbelt.vmdl" );
 					Hologram.Model = Model.Load( "models/buildings/hologram.vmdl" );
+					//Model = Model.Load( "models/buildings/transportbelt.vmdl" );
+				}
 
 				else if ( BuildingClassname == "BaseInserter" )
+				{
 					//Hologram.Model = Model.Load( "models/buildings/inserter.vmdl" );
 					Hologram.Model = Model.Load( "models/buildings/hologram.vmdl" );
+					//Model = Model.Load( "models/buildings/inserter.vmdl" );
+				}
 			}
 		}
 

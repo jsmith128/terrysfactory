@@ -71,7 +71,7 @@ partial class ItemTool : Weapon
 		{
 			Log.Info( "Hit a belt, going to put the item on it now" );
 			var tb = tr.Entity as TransportBelt;
-			tb.RecieveItem( item );
+			tb.RecieveItem( item, null, 1 );
 		}
 	}
 

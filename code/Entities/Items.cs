@@ -22,8 +22,6 @@ partial class Item : ModelEntity
 
 		PhysicsEnabled = false;
 		UsePhysicsCollision = false;
-		EnableTouch = false;
-		//EnableAllCollisions = false;
 
 		//EnableTouch = true;
 		//EnableAllCollisions = true;
