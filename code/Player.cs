@@ -47,7 +47,7 @@ partial class FactPlayer : Player
 
 		Clothing.DressEntity( this );
 
-		CameraMode = new FirstPersonCamera();
+		CameraMode = new FactoryCamera();
 
 		Log.Info( ">>>>>>> spawn_entity buildtool" );
 		Inventory.Add( new BuildTool(), true );
@@ -138,13 +138,13 @@ partial class FactPlayer : Player
 
 		if ( Input.Pressed( InputButton.View ) )
 		{
-			if ( CameraMode is ThirdPersonCamera )
+			if ( CameraMode is FactoryCamera )
 			{
 				CameraMode = new FirstPersonCamera();
 			}
 			else
 			{
-				CameraMode = new ThirdPersonCamera();
+				CameraMode = new FactoryCamera();
 			}
 		}
 
