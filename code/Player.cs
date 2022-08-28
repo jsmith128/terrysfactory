@@ -47,7 +47,7 @@ partial class FactPlayer : Player
 
 		Clothing.DressEntity( this );
 
-		CameraMode = new FactoryCamera();
+		CameraMode = new FirstPersonCamera();
 
 		Log.Info( ">>>>>>> spawn_entity buildtool" );
 		Inventory.Add( new BuildTool(), true );
