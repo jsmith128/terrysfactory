@@ -21,16 +21,8 @@ partial class TransportBelt : Building
 	public Vector3 NextPointL;
 	public Vector3 NextPointR;
 
-
-	// Float is how far from this belt's waypoint it is
-/*
-	public List<Item> ItemsL = new List<Item>();
-	public List<Item> ItemsR = new List<Item>();*/
-
 	public List<Item> TrackL = new List<Item>();
 	public List<Item> TrackR = new List<Item>();
-
-
 
 	private float ItmSpacing = 8f;
 
@@ -144,7 +136,7 @@ partial class TransportBelt : Building
 		}
 		else // idk
 		{
-			Log.Warning( "not sure where item is coming from " + this );
+			Log.Warning( "not sure where item is coming from: " + this );
 			Log.Warning( "adding item to ItemsR because not sure where it should go" );
 			TrackR.Add( item );
 			item.Position = NextPointR - 64f * Rotation.Forward;
@@ -164,7 +156,7 @@ partial class TransportBelt : Building
 		{
 			offset = Rotation.Forward * 64;
 		}
-		else if ( Dir == "left" )
+		else if ( Dir == "left" )// Probably dont need all the directions, just forward and MAYBE backward
 		{
 			offset = Rotation.Left * 64;
 		}
@@ -172,7 +164,7 @@ partial class TransportBelt : Building
 		{
 			offset = Rotation.Right * 64;
 		}
-		else if ( Dir == "back" )
+		else if ( Dir == "backward" )
 		{
 			offset = Rotation.Backward * 64;
 		}

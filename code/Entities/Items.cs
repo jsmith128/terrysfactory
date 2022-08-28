@@ -13,6 +13,7 @@ partial class Item : ModelEntity
 	// The most units we can move each tick
 	//public int Speed = 1;
 	public float DistFromWP;
+	public float DistToNextItem;
 
 	public override void Spawn()
 	{
